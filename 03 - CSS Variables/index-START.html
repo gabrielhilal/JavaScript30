@@ -21,10 +21,21 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
 
-    /*
-      misc styles, nothing to do with CSS variables
-    */
+    img {
+      padding: var(--spacing);
+      background-color: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .hl {
+      color: var(--base);
+    }
 
     body {
       text-align: center;
@@ -48,6 +59,15 @@
   </style>
 
   <script>
+    "use strict";
+    var inputs = document.querySelectorAll('.controls input');
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+
+    function handleUpdate() {
+      /*jshint validthis: true */
+      var value = this.value + (this.dataset.sizing || '');
+      document.documentElement.style.setProperty(`--${this.name}`, value);
+    }
   </script>
 
 </body>
